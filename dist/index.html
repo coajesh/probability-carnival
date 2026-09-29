@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17152e">
+  <meta name="description" content="A probability carnival game for IB MYP Mathematics.">
+  <title>Can You Beat the Carnival?</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317152e'/%3E%3Ccircle cx='32' cy='32' r='21' fill='%23ffcc4d'/%3E%3Cpath d='M32 11v42M11 32h42M17 17l30 30M47 17L17 47' stroke='%23ef476f' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2317152e'/%3E%3C/svg%3E">
+  <style>
+    :root{--ink:#17152e;--cream:#fff8e8;--yellow:#ffcc4d;--pink:#ef476f;--blue:#3a86ff;--mint:#06d6a0;--purple:#7b61ff;--muted:#716d82;--white:#fff;--shadow:0 18px 45px rgba(23,21,46,.14)}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-rounded,"Avenir Next",system-ui,sans-serif;min-height:100vh}
+    button{font:inherit}.app{min-height:100vh;display:grid;grid-template-rows:auto 1fr}.topbar{background:var(--ink);color:white;padding:14px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:5;box-shadow:0 4px 20px rgba(0,0,0,.16)}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.01em}.mini-wheel{width:32px;height:32px;border-radius:50%;background:conic-gradient(var(--pink) 0 25%,var(--yellow) 0 50%,var(--blue) 0 75%,var(--mint) 0);border:4px solid white;box-shadow:inset 0 0 0 3px var(--ink)}
+    .stats{display:flex;align-items:center;gap:10px}.stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:7px 12px;border-radius:999px;font-size:.9rem}.stat strong{font-size:1.05rem;color:var(--yellow)}
+    main{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:34px 0 56px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:end;margin-bottom:28px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:900;color:var(--pink)}h1{font-size:clamp(2.25rem,6vw,5rem);line-height:.92;margin:8px 0 14px;letter-spacing:-.055em;max-width:760px}.lead{font-size:clamp(1rem,2vw,1.2rem);line-height:1.55;color:var(--muted);max-width:650px;margin:0}
+    .mission{background:var(--white);border:2px solid var(--ink);border-radius:22px;padding:20px;box-shadow:8px 8px 0 var(--yellow)}.mission h2{font-size:1rem;margin:0 0 10px}.mission p{margin:0;color:var(--muted);line-height:1.45}.progress{height:9px;background:#ebe8df;border-radius:99px;overflow:hidden;margin-top:16px}.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));transition:width .3s}
+    .stalls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.stall{position:relative;overflow:hidden;background:white;border:2px solid var(--ink);border-radius:26px;padding:22px;box-shadow:var(--shadow);min-height:350px;display:flex;flex-direction:column}.stall:before{content:"";position:absolute;inset:0 0 auto;height:11px;background:repeating-linear-gradient(90deg,var(--stripe) 0 34px,white 34px 68px)}.stall.dice{--stripe:var(--pink)}.stall.cards{--stripe:var(--blue)}.stall.spinner{--stripe:var(--mint)}
+    .stall-head{display:flex;justify-content:space-between;gap:12px;align-items:start;margin:10px 0 18px}.stall h2{font-size:1.42rem;margin:0 0 4px}.cost{font-weight:800;color:var(--muted);font-size:.92rem}.icon{font-size:2.4rem;line-height:1;filter:drop-shadow(0 4px 0 rgba(23,21,46,.1))}.rules{background:#f6f4ee;border-radius:16px;padding:14px;font-size:.92rem;line-height:1.55;min-height:112px}.rules b{color:var(--pink)}
+    .result{margin:16px 0;min-height:62px;display:grid;place-items:center;text-align:center;border:2px dashed #d8d3c7;border-radius:15px;padding:10px;font-weight:750;line-height:1.35}.result.win{border-color:var(--mint);background:#eafff8}.result.lose{border-color:#f2a4b6;background:#fff0f4}.play{margin-top:auto;border:0;border-radius:14px;background:var(--ink);color:white;padding:13px 16px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #05040e;transition:.12s transform,.12s box-shadow}.play:hover{transform:translateY(-2px);box-shadow:0 7px 0 #05040e}.play:active{transform:translateY(4px);box-shadow:0 1px 0 #05040e}.play:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+    .panel{margin-top:24px;background:var(--ink);color:white;border-radius:26px;padding:24px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}.panel h2{margin:0 0 6px;font-size:1.35rem}.panel p{margin:0;color:#c9c5dc;line-height:1.45}.reveal{border:2px solid var(--yellow);background:var(--yellow);color:var(--ink);border-radius:14px;padding:12px 18px;font-weight:950;cursor:pointer}.reveal:disabled{opacity:.35;cursor:not-allowed}
+    .analysis{display:none;margin-top:18px;background:white;border:2px solid var(--ink);border-radius:26px;padding:24px;box-shadow:var(--shadow)}.analysis.show{display:block}.analysis h2{margin:0 0 8px;font-size:1.6rem}.analysis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.math-card{border:1.5px solid #dcd6ca;border-radius:18px;padding:16px}.math-card h3{margin:0 0 10px}.math-card p{margin:6px 0;color:var(--muted);line-height:1.4}.ev{font-size:1.4rem;font-weight:950;color:var(--pink)}.round2{background:#eeebff;border:2px solid var(--purple);border-radius:18px;padding:18px;display:flex;gap:18px;justify-content:space-between;align-items:center}.round2 p{margin:4px 0 0;color:#544d7a}.round2 button{border:0;background:var(--purple);color:white;padding:12px 17px;border-radius:12px;font-weight:900;cursor:pointer;white-space:nowrap}
+    .log-wrap{margin-top:20px}.log-wrap h2{font-size:1rem}.log{display:grid;gap:8px;max-height:210px;overflow:auto}.log-item{display:flex;justify-content:space-between;gap:12px;background:white;border:1px solid #e3ded2;border-radius:12px;padding:10px 13px;font-size:.9rem}.gain{color:#008f6c;font-weight:800}.loss{color:#d12d55;font-weight:800}.empty{color:var(--muted);font-style:italic}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:white;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:var(--shadow);transition:.25s;z-index:10}.toast.show{transform:translate(-50%,0)}
+    @media(max-width:850px){.hero{grid-template-columns:1fr}.stalls{grid-template-columns:1fr}.stall{min-height:310px}.analysis-grid{grid-template-columns:1fr}.panel{grid-template-columns:1fr}.topbar{align-items:flex-start}.brand span:last-child{display:none}.stats{gap:6px}.stat{padding:6px 9px;font-size:.78rem}.round2{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="mini-wheel" aria-hidden="true"></span><span>Probability Carnival</span></div>
+    <div class="stats" aria-live="polite"><span class="stat">Round <strong id="round">1</strong></span><span class="stat">Tokens <strong id="tokens">20</strong></span><span class="stat">Plays <strong id="plays">0</strong>/9</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div><div class="eyebrow">IB MYP Mathematics · Probability</div><h1>Can You Beat the Carnival?</h1><p class="lead">Start with 20 tokens. Choose your games, track every result, and finish with as many tokens as possible. Trust your instincts in Round 1.</p></div>
+      <aside class="mission"><h2>Your mission</h2><p>Play at least 6 times. After that, unlock the mathematics and discover whether your favourite stall is actually a smart choice.</p><div class="progress" aria-label="progress toward analysis"><span id="progress"></span></div></aside>
+    </section>
+
+    <section class="stalls" aria-label="Carnival games">
+      <article class="stall dice"><div class="stall-head"><div><h2>Lucky Dice</h2><div class="cost">Entry: 3 tokens</div></div><div class="icon" aria-hidden="true">🎲</div></div><div class="rules">Roll two dice.<br><b>Total of 7:</b> win 8<br><b>Doubles:</b> win 5<br>Otherwise: no prize</div><div class="result" id="dice-result">Ready to roll?</div><button class="play" data-game="dice">Roll the dice</button></article>
+      <article class="stall cards"><div class="stall-head"><div><h2>Mystery Cards</h2><div class="cost">Entry: 2 tokens</div></div><div class="icon" aria-hidden="true">🃏</div></div><div class="rules">Draw from 10 cards.<br><b>2 Gold:</b> win 6<br><b>3 Silver:</b> win 3<br><b>5 Empty:</b> no prize</div><div class="result" id="cards-result">Which card will you draw?</div><button class="play" data-game="cards">Draw a card</button></article>
+      <article class="stall spinner"><div class="stall-head"><div><h2>Prize Spinner</h2><div class="cost">Entry: 4 tokens</div></div><div class="icon" aria-hidden="true">🎡</div></div><div class="rules">Spin the unequal wheel.<br><b>Gold 10%:</b> win 12<br><b>Blue 30%:</b> win 5<br><b>Pink 60%:</b> no prize</div><div class="result" id="spinner-result">The sections are not equal.</div><button class="play" data-game="spinner">Spin the wheel</button></article>
+    </section>
+
+    <section class="panel"><div><h2>Ready to reveal the mathematics?</h2><p id="reveal-copy">Complete 6 plays to unlock the probability report.</p></div><button class="reveal" id="reveal" disabled>Unlock Math Report</button></section>
+
+    <section class="analysis" id="analysis" aria-live="polite"><h2>The Mathematics Behind the Games</h2><p>Your results can be lucky or unlucky in the short term. Expected value estimates the average net change per play over many attempts.</p><div class="analysis-grid" id="analysis-grid"></div><div class="round2"><div><strong>Round 2: Evidence-based decisions</strong><p>You now know the probabilities. Reset to 10 tokens and see whether mathematical evidence changes your strategy.</p></div><button id="round2">Start Round 2</button></div></section>
+
+    <section class="log-wrap"><h2>Game record</h2><div class="log" id="log"><div class="empty">Your results will appear here.</div></div></section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+  const state={tokens:20,plays:0,round:1,history:[],byGame:{dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}}};
+  const config={
+    dice:{name:'Lucky Dice',cost:3,ev:-0.833},
+    cards:{name:'Mystery Cards',cost:2,ev:0.1},
+    spinner:{name:'Prize Spinner',cost:4,ev:-1.3}
+  };
+  const $=s=>document.querySelector(s);
+  const rand=n=>Math.floor(Math.random()*n)+1;
+  function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1800)}
+  function resolveGame(game){
+    if(game==='dice'){const a=rand(6),b=rand(6),total=a+b;let prize=0;if(total===7)prize=8;else if(a===b)prize=5;return{prize,text:`You rolled ${a} and ${b}. ${prize?`You win ${prize} tokens!`:'No prize this time.'}`}}
+    if(game==='cards'){const draw=rand(10);const type=draw<=2?'Gold':draw<=5?'Silver':'Empty';const prize=type==='Gold'?6:type==='Silver'?3:0;return{prize,text:`${type} card! ${prize?`You win ${prize} tokens.`:'No prize this time.'}`}}
+    const spin=Math.random();const colour=spin<.1?'Gold':spin<.4?'Blue':'Pink';const prize=colour==='Gold'?12:colour==='Blue'?5:0;return{prize,text:`The wheel lands on ${colour}. ${prize?`You win ${prize} tokens!`:'No prize this time.'}`};
+  }
+  function play(game){
+    const c=config[game];if(state.plays>=9){toast('Round complete. Open the Math Report.');return}if(state.tokens<c.cost){toast(`You need ${c.cost} tokens to play.`);return}
+    const before=state.tokens;state.tokens-=c.cost;const outcome=resolveGame(game);state.tokens+=outcome.prize;state.plays++;const net=state.tokens-before;const s=state.byGame[game];s.plays++;s.net+=net;if(outcome.prize>0)s.wins++;
+    state.history.unshift({game:c.name,text:outcome.text,net});const box=$(`#${game}-result`);box.textContent=outcome.text;box.className=`result ${outcome.prize?'win':'lose'}`;render();
+  }
+  function render(){
+    $('#tokens').textContent=state.tokens;$('#plays').textContent=state.plays;$('#round').textContent=state.round;$('#progress').style.width=`${Math.min(100,state.plays/6*100)}%`;
+    const unlocked=state.plays>=6;$('#reveal').disabled=!unlocked;$('#reveal-copy').textContent=unlocked?'Your report is ready. Compare intuition with evidence.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the probability report.`;
+    document.querySelectorAll('.play').forEach(b=>{const c=config[b.dataset.game];b.disabled=state.plays>=9||state.tokens<c.cost});
+    const log=$('#log');log.innerHTML=state.history.length?state.history.map(h=>`<div class="log-item"><span><strong>${h.game}</strong> · ${h.text}</span><span class="${h.net>=0?'gain':'loss'}">${h.net>=0?'+':''}${h.net}</span></div>`).join(''):'<div class="empty">Your results will appear here.</div>';
+  }
+  function reveal(){
+    const data=[['dice','Lucky Dice','P(win) = 12/36 = 33.3%','Expected net change: −0.83 tokens'],['cards','Mystery Cards','P(win) = 5/10 = 50%','Expected net change: +0.10 tokens'],['spinner','Prize Spinner','P(win) = 40%','Expected net change: −1.30 tokens']];
+    $('#analysis-grid').innerHTML=data.map(([key,name,p,ev])=>{const s=state.byGame[key];const exp=s.plays?`${Math.round(s.wins/s.plays*100)}% (${s.wins}/${s.plays})`:'Not played';return`<article class="math-card"><h3>${name}</h3><p>${p}</p><p>Your experimental win rate: <strong>${exp}</strong></p><div class="ev">${ev}</div></article>`}).join('');
+    $('#analysis').classList.add('show');$('#analysis').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function startRound2(){state.tokens=10;state.plays=0;state.round=2;state.history=[];state.byGame={dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}};document.querySelectorAll('.result').forEach(x=>{x.className='result';x.textContent=x.id==='dice-result'?'Ready to roll?':x.id==='cards-result'?'Which card will you draw?':'The sections are not equal.'});$('#analysis').classList.remove('show');render();window.scrollTo({top:0,behavior:'smooth'});toast('Round 2 started with 10 tokens.');}
+  document.querySelectorAll('.play').forEach(b=>b.addEventListener('click',()=>play(b.dataset.game)));$('#reveal').addEventListener('click',reveal);$('#round2').addEventListener('click',startRound2);render();
+</script>
+</body>
+</html>
