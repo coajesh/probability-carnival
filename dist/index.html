@@ -51,6 +51,16 @@
   </main>
 </div>
 <div class="toast" id="toast" role="status"></div>
+<dialog id="password-dialog" style="border:2px solid #252525;border-radius:20px;padding:24px;max-width:360px;width:calc(100% - 64px)">
+  <form id="password-form">
+    <h2 style="margin-top:0">Unlock Math Report</h2>
+    <label for="report-password">Enter the teacher password</label>
+    <input id="report-password" type="password" autocomplete="off" required style="display:block;box-sizing:border-box;width:100%;margin:12px 0;padding:12px;font:inherit">
+    <p id="password-error" role="alert" style="color:#b3261e"></p>
+    <button type="submit" style="padding:10px 16px;cursor:pointer">Unlock</button>
+    <button type="button" id="password-cancel" style="padding:10px 16px;cursor:pointer">Cancel</button>
+  </form>
+</dialog>
 <script>
   const state={tokens:20,plays:0,round:1,history:[],byGame:{dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}}};
   const config={
@@ -73,17 +83,30 @@
   }
   function render(){
     $('#tokens').textContent=state.tokens;$('#plays').textContent=state.plays;$('#round').textContent=state.round;$('#progress').style.width=`${Math.min(100,state.plays/6*100)}%`;
-    const unlocked=state.plays>=6;$('#reveal').disabled=!unlocked;$('#reveal-copy').textContent=unlocked?'Your report is ready. Compare intuition with evidence.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the probability report.`;
+    const unlocked=state.plays>=6;$('#reveal').disabled=!unlocked;$('#reveal-copy').textContent=unlocked?'Your report is ready. Ask your teacher for the password.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the probability report.`;
     document.querySelectorAll('.play').forEach(b=>{const c=config[b.dataset.game];b.disabled=state.plays>=9||state.tokens<c.cost});
     const log=$('#log');log.innerHTML=state.history.length?state.history.map(h=>`<div class="log-item"><span><strong>${h.game}</strong> · ${h.text}</span><span class="${h.net>=0?'gain':'loss'}">${h.net>=0?'+':''}${h.net}</span></div>`).join(''):'<div class="empty">Your results will appear here.</div>';
   }
-  function reveal(){
+  function requestReport(){
+    if(state.plays<6)return;
+    $('#password-form').reset();$('#password-error').textContent='';
+    $('#password-dialog').showModal();$('#report-password').focus();
+  }
+  function reveal(password){
+    if(state.plays<6||password!=='12345678')return;
     const data=[['dice','Lucky Dice','P(win) = 12/36 = 33.3%','Expected net change: −0.83 tokens'],['cards','Mystery Cards','P(win) = 5/10 = 50%','Expected net change: +0.10 tokens'],['spinner','Prize Spinner','P(win) = 40%','Expected net change: −1.30 tokens']];
     $('#analysis-grid').innerHTML=data.map(([key,name,p,ev])=>{const s=state.byGame[key];const exp=s.plays?`${Math.round(s.wins/s.plays*100)}% (${s.wins}/${s.plays})`:'Not played';return`<article class="math-card"><h3>${name}</h3><p>${p}</p><p>Your experimental win rate: <strong>${exp}</strong></p><div class="ev">${ev}</div></article>`}).join('');
     $('#analysis').classList.add('show');$('#analysis').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function startRound2(){state.tokens=10;state.plays=0;state.round=2;state.history=[];state.byGame={dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}};document.querySelectorAll('.result').forEach(x=>{x.className='result';x.textContent=x.id==='dice-result'?'Ready to roll?':x.id==='cards-result'?'Which card will you draw?':'The sections are not equal.'});$('#analysis').classList.remove('show');render();window.scrollTo({top:0,behavior:'smooth'});toast('Round 2 started with 10 tokens.');}
-  document.querySelectorAll('.play').forEach(b=>b.addEventListener('click',()=>play(b.dataset.game)));$('#reveal').addEventListener('click',reveal);$('#round2').addEventListener('click',startRound2);render();
+  $('#password-cancel').addEventListener('click',()=>$('#password-dialog').close());
+  $('#password-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    const password=$('#report-password').value;
+    if(password!=='12345678'){$('#password-error').textContent='Incorrect password. Please try again.';$('#report-password').select();return;}
+    $('#password-dialog').close();$('#password-form').reset();reveal(password);
+  });
+  document.querySelectorAll('.play').forEach(b=>b.addEventListener('click',()=>play(b.dataset.game)));$('#reveal').addEventListener('click',requestReport);$('#round2').addEventListener('click',startRound2);render();
 </script>
 </body>
 </html>
