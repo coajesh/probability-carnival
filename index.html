@@ -22,6 +22,7 @@
     .analysis{display:none;margin-top:18px;background:white;border:2px solid var(--ink);border-radius:26px;padding:24px;box-shadow:var(--shadow)}.analysis.show{display:block}.analysis h2{margin:0 0 8px;font-size:1.6rem}.analysis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.math-card{border:1.5px solid #dcd6ca;border-radius:18px;padding:16px}.math-card h3{margin:0 0 10px}.math-card p{margin:6px 0;color:var(--muted);line-height:1.4}.ev{font-size:1.4rem;font-weight:950;color:var(--pink)}.round2{background:#eeebff;border:2px solid var(--purple);border-radius:18px;padding:18px;display:flex;gap:18px;justify-content:space-between;align-items:center}.round2 p{margin:4px 0 0;color:#544d7a}.round2 button{border:0;background:var(--purple);color:white;padding:12px 17px;border-radius:12px;font-weight:900;cursor:pointer;white-space:nowrap}
     .log-wrap{margin-top:20px}.log-wrap h2{font-size:1rem}.log{display:grid;gap:8px;max-height:210px;overflow:auto}.log-item{display:flex;justify-content:space-between;gap:12px;background:white;border:1px solid #e3ded2;border-radius:12px;padding:10px 13px;font-size:.9rem}.gain{color:#008f6c;font-weight:800}.loss{color:#d12d55;font-weight:800}.empty{color:var(--muted);font-style:italic}
     .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:white;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:var(--shadow);transition:.25s;z-index:10}.toast.show{transform:translate(-50%,0)}
+    [hidden]{display:none!important}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.83rem;margin:12px 0}th,td{text-align:left;padding:8px 5px;border-bottom:1px solid #ded9cf}th{background:#f6f4ee}.calculation{background:#fff8e8;padding:12px;border-radius:10px;overflow-wrap:anywhere}.actual{margin-top:18px;padding-top:14px;border-top:2px solid var(--blue)}.actual h4{margin:0 0 10px;color:var(--blue)}.math-card{min-width:0}.analysis{scroll-margin-top:90px}
     @media(max-width:850px){.hero{grid-template-columns:1fr}.stalls{grid-template-columns:1fr}.stall{min-height:310px}.analysis-grid{grid-template-columns:1fr}.panel{grid-template-columns:1fr}.topbar{align-items:flex-start}.brand span:last-child{display:none}.stats{gap:6px}.stat{padding:6px 9px;font-size:.78rem}.round2{align-items:flex-start;flex-direction:column}}
   </style>
 </head>
@@ -38,14 +39,14 @@
     </section>
 
     <section class="stalls" aria-label="Carnival games">
-      <article class="stall dice"><div class="stall-head"><div><h2>Lucky Dice</h2><div class="cost">Entry: 3 tokens</div></div><div class="icon" aria-hidden="true">🎲</div></div><div class="rules">Roll two dice.<br><b>Total of 7:</b> win 8<br><b>Doubles:</b> win 5<br>Otherwise: no prize</div><div class="result" id="dice-result">Ready to roll?</div><button class="play" data-game="dice">Roll the dice</button></article>
-      <article class="stall cards"><div class="stall-head"><div><h2>Mystery Cards</h2><div class="cost">Entry: 2 tokens</div></div><div class="icon" aria-hidden="true">🃏</div></div><div class="rules">Draw from 10 cards.<br><b>2 Gold:</b> win 6<br><b>3 Silver:</b> win 3<br><b>5 Empty:</b> no prize</div><div class="result" id="cards-result">Which card will you draw?</div><button class="play" data-game="cards">Draw a card</button></article>
-      <article class="stall spinner"><div class="stall-head"><div><h2>Prize Spinner</h2><div class="cost">Entry: 4 tokens</div></div><div class="icon" aria-hidden="true">🎡</div></div><div class="rules">Spin the unequal wheel.<br><b>Gold 10%:</b> win 12<br><b>Blue 30%:</b> win 5<br><b>Pink 60%:</b> no prize</div><div class="result" id="spinner-result">The sections are not equal.</div><button class="play" data-game="spinner">Spin the wheel</button></article>
+      <article class="stall dice"><div class="stall-head"><div><h2>Lucky Dice</h2><div class="cost">Entry: 3 tokens</div></div><div class="icon" aria-hidden="true">🎲</div></div><div class="rules">Pay 3 tokens, then roll two independent, fair six-sided dice.<br><b>Sum is 7:</b> receive 8 tokens.<br><b>Doubles (both dice match):</b> receive 5 tokens.<br>Any other result: receive 0.<br>Only one prize per play. Net change = prize − 3.</div><div class="result" id="dice-result">Ready to roll?</div><button class="play" data-game="dice">Roll the dice</button></article>
+      <article class="stall cards"><div class="stall-head"><div><h2>Mystery Cards</h2><div class="cost">Entry: 2 tokens</div></div><div class="icon" aria-hidden="true">🃏</div></div><div class="rules">Pay 2 tokens and draw one of 10 equally likely cards.<br><b>2 Gold cards:</b> receive 6 tokens.<br><b>3 Silver cards:</b> receive 3 tokens.<br><b>5 Empty cards:</b> receive 0.<br>The card is replaced and the deck reshuffled after every draw. Net change = prize − 2.</div><div class="result" id="cards-result">Which card will you draw?</div><button class="play" data-game="cards">Draw a card</button></article>
+      <article class="stall spinner"><div class="stall-head"><div><h2>Prize Spinner</h2><div class="cost">Entry: 4 tokens</div></div><div class="icon" aria-hidden="true">🎡</div></div><div class="rules">Pay 4 tokens and spin once. The three sectors have different sizes.<br><b>Gold (10% of the wheel):</b> receive 12 tokens.<br><b>Blue (30%):</b> receive 5 tokens.<br><b>Pink (60%):</b> receive 0.<br>Each spin is independent. Net change = prize − 4.</div><div class="result" id="spinner-result">The sections are not equal.</div><button class="play" data-game="spinner">Spin the wheel</button></article>
     </section>
 
     <section class="panel"><div><h2>Ready to reveal the mathematics?</h2><p id="reveal-copy">Complete 6 plays to unlock the probability report.</p></div><button class="reveal" id="reveal" disabled>Unlock Math Report</button></section>
 
-    <section class="analysis" id="analysis" aria-live="polite"><h2>The Mathematics Behind the Games</h2><p>Your results can be lucky or unlucky in the short term. Expected value estimates the average net change per play over many attempts.</p><div class="analysis-grid" id="analysis-grid"></div><div class="round2"><div><strong>Round 2: Evidence-based decisions</strong><p>You now know the probabilities. Reset to 10 tokens and see whether mathematical evidence changes your strategy.</p></div><button id="round2">Start Round 2</button></div></section>
+    <section class="analysis" id="analysis" aria-live="polite"><h2 id="report-title">Expected Net Change</h2><p id="report-intro"></p><div class="analysis-grid" id="analysis-grid"></div><div class="round2" id="round2-panel"><div><strong>Round 2: Evidence-based decisions</strong><p>You now know the probabilities. Reset to 10 tokens and see whether mathematical evidence changes your strategy.</p></div><button id="round2">Start Round 2</button></div></section>
 
     <section class="log-wrap"><h2>Game record</h2><div class="log" id="log"><div class="empty">Your results will appear here.</div></div></section>
   </main>
@@ -64,7 +65,7 @@
 <script>
   const state={tokens:20,plays:0,round:1,history:[],byGame:{dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}}};
   const config={
-    dice:{name:'Lucky Dice',cost:3,ev:-0.833},
+    dice:{name:'Lucky Dice',cost:3,ev:-5/6},
     cards:{name:'Mystery Cards',cost:2,ev:0.1},
     spinner:{name:'Prize Spinner',cost:4,ev:-1.3}
   };
@@ -83,27 +84,46 @@
   }
   function render(){
     $('#tokens').textContent=state.tokens;$('#plays').textContent=state.plays;$('#round').textContent=state.round;$('#progress').style.width=`${Math.min(100,state.plays/6*100)}%`;
+    if($('#analysis').classList.contains('show'))updateReport();
     const unlocked=state.plays>=6;$('#reveal').disabled=!unlocked;$('#reveal-copy').textContent=unlocked?'Your report is ready. Ask your teacher for the password.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the probability report.`;
     document.querySelectorAll('.play').forEach(b=>{const c=config[b.dataset.game];b.disabled=state.plays>=9||state.tokens<c.cost});
     const log=$('#log');log.innerHTML=state.history.length?state.history.map(h=>`<div class="log-item"><span><strong>${h.game}</strong> · ${h.text}</span><span class="${h.net>=0?'gain':'loss'}">${h.net>=0?'+':''}${h.net}</span></div>`).join(''):'<div class="empty">Your results will appear here.</div>';
   }
+  const reportPassword=()=>state.round===1?'12345678':'87654321';
+  const signed=n=>(n>=0?'+':'−')+Math.abs(n).toFixed(2);
   function requestReport(){
     if(state.plays<6)return;
     $('#password-form').reset();$('#password-error').textContent='';
+    $('#password-dialog h2').textContent=`Unlock Round ${state.round} Math Report`;
     $('#password-dialog').showModal();$('#report-password').focus();
   }
   function reveal(password){
-    if(state.plays<6||password!=='12345678')return;
-    const data=[['dice','Lucky Dice','P(win) = 12/36 = 33.3%','Expected net change: −0.83 tokens'],['cards','Mystery Cards','P(win) = 5/10 = 50%','Expected net change: +0.10 tokens'],['spinner','Prize Spinner','P(win) = 40%','Expected net change: −1.30 tokens']];
-    $('#analysis-grid').innerHTML=data.map(([key,name,p,ev])=>{const s=state.byGame[key];const exp=s.plays?`${Math.round(s.wins/s.plays*100)}% (${s.wins}/${s.plays})`:'Not played';return`<article class="math-card"><h3>${name}</h3><p>${p}</p><p>Your experimental win rate: <strong>${exp}</strong></p><div class="ev">${ev}</div></article>`}).join('');
+    if(state.plays<6||password!==reportPassword())return;
+    updateReport();
     $('#analysis').classList.add('show');$('#analysis').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function updateReport(){
+    const second=state.round===2;
+    $('#report-title').textContent=second?'Round 2: Actual + Expected Net Change':'Round 1: Expected Net Change';
+    $('#report-intro').textContent='Net change = prize received − entry cost. Expected net change = sum of (probability × net change for each outcome). It is a long-run average per play, not a guaranteed result.'+(second?' Compare your actual average per play with the expected average per play below. Actual figures use Round 2 only; short runs can differ because of chance.':'');
+    $('#round2-panel').hidden=second;
+    const explanations={
+      dice:{why:'Two fair dice give 6 × 6 = 36 equally likely ordered outcomes. A sum of 7 has 6 outcomes: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). Doubles have 6 outcomes, from (1,1) to (6,6). These do not overlap. The remaining 24 outcomes pay nothing.',rows:[['Sum of 7','6/36','8','8 − 3 = +5'],['Doubles','6/36','5','5 − 3 = +2'],['Other','24/36','0','0 − 3 = −3']],formula:'(6/36 × 5) + (6/36 × 2) + (24/36 × −3) = −5/6 ≈ −0.83',meaning:'Over many plays, the average loss is about 0.83 tokens per play.'},
+      cards:{why:'Each of the 10 cards is equally likely: 2 Gold, 3 Silver and 5 Empty. Replacing the card after every draw keeps these probabilities the same.',rows:[['Gold','2/10','6','6 − 2 = +4'],['Silver','3/10','3','3 − 2 = +1'],['Empty','5/10','0','0 − 2 = −2']],formula:'(2/10 × 4) + (3/10 × 1) + (5/10 × −2) = +0.10',meaning:'Over many plays, the average gain is 0.10 tokens per play. A short run can still lose tokens.'},
+      spinner:{why:'The wheel is unequal: Gold covers 10%, Blue 30% and Pink 60%. The three colours are not equally likely.',rows:[['Gold','0.10','12','12 − 4 = +8'],['Blue','0.30','5','5 − 4 = +1'],['Pink','0.60','0','0 − 4 = −4']],formula:'(0.10 × 8) + (0.30 × 1) + (0.60 × −4) = −1.30',meaning:'Over many plays, the average loss is 1.30 tokens per play.'}
+    };
+    $('#analysis-grid').innerHTML=Object.entries(config).map(([key,c])=>{
+      const e=explanations[key],g=state.byGame[key];
+      const actual=second?`<div class="actual"><h4>Your Round 2 results</h4><p>Plays: ${g.plays}</p>${g.plays?`<p>Total prizes received: ${g.net+g.plays*c.cost} tokens.<br>Total entry costs: ${g.plays} × ${c.cost} = ${g.plays*c.cost} tokens.</p><p><strong>Actual total net change:</strong> ${g.net+g.plays*c.cost} − ${g.plays*c.cost} = ${signed(g.net)} tokens.</p><p><strong>Actual average net change:</strong> ${signed(g.net)} ÷ ${g.plays} = <strong>${signed(g.net/g.plays)} tokens/play</strong>.</p><p><strong>Expected average net change:</strong> ${signed(c.ev)} tokens/play.</p>`:'<p>Not played this round. Actual average net change is unavailable.</p>'}</div>`:'';
+      return `<article class="math-card"><h3>${c.name}</h3><p><strong>1. Find the probabilities</strong></p><p>${e.why}</p><p><strong>2. Subtract the entry cost from each prize</strong></p><div class="table-wrap"><table><thead><tr><th>Outcome</th><th>Probability</th><th>Prize</th><th>Net change</th></tr></thead><tbody>${e.rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p><strong>3. Weight each net change by its probability, then add</strong></p><p class="calculation">${e.formula}</p><div class="ev">Expected net change:<br>${signed(c.ev)} tokens/play</div><p>${e.meaning}</p>${actual}</article>`;
+    }).join('');
   }
   function startRound2(){state.tokens=10;state.plays=0;state.round=2;state.history=[];state.byGame={dice:{plays:0,wins:0,net:0},cards:{plays:0,wins:0,net:0},spinner:{plays:0,wins:0,net:0}};document.querySelectorAll('.result').forEach(x=>{x.className='result';x.textContent=x.id==='dice-result'?'Ready to roll?':x.id==='cards-result'?'Which card will you draw?':'The sections are not equal.'});$('#analysis').classList.remove('show');render();window.scrollTo({top:0,behavior:'smooth'});toast('Round 2 started with 10 tokens.');}
   $('#password-cancel').addEventListener('click',()=>$('#password-dialog').close());
   $('#password-form').addEventListener('submit',event=>{
     event.preventDefault();
     const password=$('#report-password').value;
-    if(password!=='12345678'){$('#password-error').textContent='Incorrect password. Please try again.';$('#report-password').select();return;}
+    if(password!==reportPassword()){$('#password-error').textContent='Incorrect password. Please try again.';$('#report-password').select();return;}
     $('#password-dialog').close();$('#password-form').reset();reveal(password);
   });
   document.querySelectorAll('.play').forEach(b=>b.addEventListener('click',()=>play(b.dataset.game)));$('#reveal').addEventListener('click',requestReport);$('#round2').addEventListener('click',startRound2);render();
