@@ -40,12 +40,12 @@
     </section>
 
     <section class="stalls" aria-label="Carnival games">
-      <article class="stall dice"><div class="stall-head"><div><h2>Lucky Dice</h2><div class="cost">Entry: 3 tokens</div></div><div class="icon" aria-hidden="true">🎲</div></div><div class="rules">Pay 3 tokens, then roll two independent, fair six-sided dice.<br><b>Sum is 7:</b> receive 8 tokens.<br><b>Doubles (both dice match):</b> receive 5 tokens.<br>Any other result: receive 0.<br>Only one prize per play. Net change = prize − 3.</div><div class="game-stage" aria-hidden="true"><span class="die" id="die-a">⚀</span><span class="die" id="die-b">⚀</span></div><div class="result" role="status" id="dice-result">Ready to roll?</div><button class="play" data-game="dice">Roll the dice</button></article>
-      <article class="stall cards"><div class="stall-head"><div><h2>Mystery Cards</h2><div class="cost">Entry: 2 tokens</div></div><div class="icon" aria-hidden="true">🃏</div></div><div class="rules">Pay 2 tokens and draw one of 10 equally likely cards.<br><b>2 Gold cards:</b> receive 6 tokens.<br><b>3 Silver cards:</b> receive 3 tokens.<br><b>5 Empty cards:</b> receive 0.<br>The card is replaced and the deck reshuffled after every draw. Net change = prize − 2.</div><div class="game-stage" aria-hidden="true"><div class="drawing-card" id="draw-card">?</div></div><div class="result" role="status" id="cards-result">Which card will you draw?</div><button class="play" data-game="cards">Draw a card</button></article>
-      <article class="stall spinner"><div class="stall-head"><div><h2>Prize Spinner</h2><div class="cost">Entry: 4 tokens</div></div><div class="icon" aria-hidden="true">🎡</div></div><div class="rules">Pay 4 tokens and spin once. The three sectors have different sizes.<br><b>Gold (10% of the wheel):</b> receive 12 tokens.<br><b>Blue (30%):</b> receive 5 tokens.<br><b>Pink (60%):</b> receive 0.<br>Each spin is independent. Net change = prize − 4.</div><div class="game-stage" aria-hidden="true"><div class="wheel-wrap"><span class="pointer"></span><div class="wheel" id="prize-wheel"></div></div></div><div class="result" role="status" id="spinner-result">The sections are not equal.</div><button class="play" data-game="spinner">Spin the wheel</button></article>
+      <article class="stall dice"><div class="stall-head"><div><h2>Lucky Dice</h2><div class="cost">Entry: 3 tokens</div></div><div class="icon" aria-hidden="true">🎲</div></div><div class="rules">Pay 3 tokens, then roll two independent, fair six-sided dice.<br><b>Sum is 7:</b> win 8 tokens.<br><b>Doubles (both dice match):</b> win 5 tokens.<br><b>Any others:</b> win 0 tokens.<br>Only one prize per play.<br> <strong> Net change = prize − 3.</strong></div><div class="game-stage" aria-hidden="true"><span class="die" id="die-a">⚀</span><span class="die" id="die-b">⚀</span></div><div class="result" role="status" id="dice-result">Ready to roll?</div><button class="play" data-game="dice">Roll the dice</button></article>
+      <article class="stall cards"><div class="stall-head"><div><h2>Mystery Cards</h2><div class="cost">Entry: 2 tokens</div></div><div class="icon" aria-hidden="true">🃏</div></div><div class="rules">Pay 2 tokens and draw one of 10 equally likely cards.<br><b>2 Gold cards:</b> win 6 tokens.<br><b>3 Silver cards:</b> win 3 tokens.<br><b>5 Empty cards:</b> win 0 tokens.<br>The card is replaced and the deck reshuffled after every draw. <br> <strong> Net change = prize − 2.</strong> </div><div class="game-stage" aria-hidden="true"><div class="drawing-card" id="draw-card">?</div></div><div class="result" role="status" id="cards-result">Which card will you draw?</div><button class="play" data-game="cards">Draw a card</button></article>
+      <article class="stall spinner"><div class="stall-head"><div><h2>Prize Spinner</h2><div class="cost">Entry: 4 tokens</div></div><div class="icon" aria-hidden="true">🎡</div></div><div class="rules">Pay 4 tokens and spin once. The three sectors have different sizes.<br><b>Gold (10% of the wheel):</b> win 12 tokens.<br><b>Blue (30%):</b> win 5 tokens.<br><b>Pink (60%):</b> win 0 tokens.<br>Each spin is independent. <br> <strong> Net change = prize − 4.</strong></div><div class="game-stage" aria-hidden="true"><div class="wheel-wrap"><span class="pointer"></span><div class="wheel" id="prize-wheel"></div></div></div><div class="result" role="status" id="spinner-result">The sections are not equal.</div><button class="play" data-game="spinner">Spin the wheel</button></article>
     </section>
 
-    <section class="panel"><div><h2>Ready to reveal the mathematics?</h2><p id="reveal-copy">Complete 6 plays to unlock the probability report.</p></div><button class="reveal" id="reveal" disabled>Unlock Math Report</button></section>
+    <section class="panel"><div><h2>Ready to reveal the mystery box?</h2><p id="reveal-copy">Complete 6 plays to unlock the mystery box.</p></div><button class="reveal" id="reveal" disabled>Unlock Mystery Box</button></section>
 
     <section class="analysis" id="analysis" aria-live="polite"><h2 id="report-title">Expected Net Change</h2><p id="report-intro"></p><div class="analysis-grid" id="analysis-grid"></div><div class="round2" id="round2-panel"><div><strong>Round 2: Evidence-based decisions</strong><p>You now know the probabilities. Reset to 10 tokens and see whether mathematical evidence changes your strategy.</p></div><button id="round2">Start Round 2</button></div></section>
 
@@ -55,8 +55,8 @@
 <div class="toast" id="toast" role="status"></div>
 <dialog id="password-dialog" style="border:2px solid #252525;border-radius:20px;padding:24px;max-width:360px;width:calc(100% - 64px)">
   <form id="password-form">
-    <h2 style="margin-top:0">Unlock Math Report</h2>
-    <label for="report-password">Enter the teacher password</label>
+    <h2 style="margin-top:0">Unlock Mystery Box</h2>
+    <label for="report-password">Enter the password</label>
     <input id="report-password" type="password" autocomplete="off" required style="display:block;box-sizing:border-box;width:100%;margin:12px 0;padding:12px;font:inherit">
     <p id="password-error" role="alert" style="color:#b3261e"></p>
     <button type="submit" style="padding:10px 16px;cursor:pointer">Unlock</button>
@@ -101,7 +101,7 @@
   }
   async function play(game){
     if(state.busy)return;
-    const c=config[game];if(state.plays>=9){toast('Round complete. Open the Math Report.');return}if(state.tokens<c.cost){toast(`You need ${c.cost} tokens to play.`);return}
+    const c=config[game];if(state.plays>=9){toast('Round complete. Open the Mystery Box.');return}if(state.tokens<c.cost){toast(`You need ${c.cost} tokens to play.`);return}
     state.busy=true;render();
     const outcome=resolveGame(game),box=$(`#${game}-result`);box.className='result';box.textContent=game==='dice'?'Rolling the dice…':game==='cards'?'Shuffling and drawing…':'Spinning the wheel…';
     try{await animateDraw(game,outcome);}catch(error){console.warn('Animation unavailable; showing result.',error);}
@@ -111,7 +111,7 @@
   function render(){
     $('#tokens').textContent=state.tokens;$('#plays').textContent=state.plays;$('#round').textContent=state.round;$('#progress').style.width=`${Math.min(100,state.plays/6*100)}%`;
     if($('#analysis').classList.contains('show'))updateReport();
-    const unlocked=state.plays>=6;$('#reveal').disabled=state.busy||!unlocked;$('#round2').disabled=state.busy;$('#reveal-copy').textContent=unlocked?'Your report is ready. Ask your teacher for the password.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the probability report.`;
+    const unlocked=state.plays>=6;$('#reveal').disabled=state.busy||!unlocked;$('#round2').disabled=state.busy;$('#reveal-copy').textContent=unlocked?'Please await the password.':`Complete ${6-state.plays} more play${6-state.plays===1?'':'s'} to unlock the mystery box.`;
     document.querySelectorAll('.play').forEach(b=>{const c=config[b.dataset.game];b.disabled=state.busy||state.plays>=9||state.tokens<c.cost});
     const log=$('#log');log.innerHTML=state.history.length?state.history.map(h=>`<div class="log-item"><span><strong>${h.game}</strong> · ${h.text}</span><span class="${h.net>=0?'gain':'loss'}">${h.net>=0?'+':''}${h.net}</span></div>`).join(''):'<div class="empty">Your results will appear here.</div>';
   }
@@ -120,7 +120,7 @@
   function requestReport(){
     if(state.busy||state.plays<6)return;
     $('#password-form').reset();$('#password-error').textContent='';
-    $('#password-dialog h2').textContent=`Unlock Round ${state.round} Math Report`;
+    $('#password-dialog h2').textContent=`Unlock Round ${state.round} Mystery Box`;
     $('#password-dialog').showModal();$('#report-password').focus();
   }
   function reveal(password){
@@ -140,7 +140,7 @@
     };
     $('#analysis-grid').innerHTML=Object.entries(config).map(([key,c])=>{
       const e=explanations[key],g=state.byGame[key];
-      const actual=second?`<div class="actual"><h4>Your Round 2 results</h4><p>Plays: ${g.plays}</p>${g.plays?`<p>Total prizes received: ${g.net+g.plays*c.cost} tokens.<br>Total entry costs: ${g.plays} × ${c.cost} = ${g.plays*c.cost} tokens.</p><p><strong>Actual total net change:</strong> ${g.net+g.plays*c.cost} − ${g.plays*c.cost} = ${signed(g.net)} tokens.</p><p><strong>Actual average net change:</strong> ${g.net<0?'('+signed(g.net)+')':signed(g.net)} ÷ ${g.plays} = <strong>${signed(g.net/g.plays)} tokens/play</strong>.</p><p><strong>Expected average net change:</strong> ${signed(c.ev)} tokens/play.</p>`:'<p>Not played this round. Actual average net change is unavailable.</p>'}</div>`:'';
+      const actual=second?`<div class="actual"><h4>Your Round 2 results</h4><p>Plays: ${g.plays}</p>${g.plays?`<p>Total prizes received: ${g.net+g.plays*c.cost} tokens.<br>Total entry costs: ${g.plays} × ${c.cost} = ${g.plays*c.cost} tokens.</p><p><strong>Actual total net change:</strong> ${g.net+g.plays*c.cost} − ${g.plays*c.cost} = ${signed(g.net)} tokens.</p><div class="ev">Actual average net change: ${g.net<0?'('+signed(g.net)+')':signed(g.net)} ÷ ${g.plays} = <strong>${signed(g.net/g.plays)} tokens/play</strong>.</div><p><strong>Expected average net change:</strong> ${signed(c.ev)} tokens/play.</p>`:'<p>Not played this round. Actual average net change is unavailable.</p>'}</div>`:'';
       return `<article class="math-card"><h3>${c.name}</h3><p><strong>1. Find the probabilities</strong></p><p>${e.why}</p><p><strong>2. Subtract the entry cost from each prize</strong></p><div class="table-wrap"><table><thead><tr><th>Outcome</th><th>Probability</th><th>Prize</th><th>Net change</th></tr></thead><tbody>${e.rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p><strong>3. Weight each net change by its probability, then add</strong></p><p class="calculation">${e.formula}</p><div class="ev">Expected net change:<br>${signed(c.ev)} tokens/play</div><p>${e.meaning}</p>${actual}</article>`;
     }).join('');
   }
@@ -151,6 +151,7 @@
     const password=$('#report-password').value;
     if(password!==reportPassword()){$('#password-error').textContent='Incorrect password. Please try again.';$('#report-password').select();return;}
     $('#password-dialog').close();$('#password-form').reset();reveal(password);
+    if(state.round===1){state.tokens=0;render();}
   });
   document.querySelectorAll('.play').forEach(b=>b.addEventListener('click',()=>play(b.dataset.game)));$('#reveal').addEventListener('click',requestReport);$('#round2').addEventListener('click',startRound2);render();
 </script>
